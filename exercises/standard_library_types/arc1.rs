@@ -26,11 +26,11 @@ use std::thread;
 
 fn main() {
     let numbers: Vec<_> = (0..100u32).collect();
-    let shared_numbers = // TODO
+    let shared_numbers = Arc::new(numbers)// TODO
     let mut joinhandles = Vec::new();
-
+    let chunk = numbers.size()/8;
     for offset in 0..8 {
-        let child_numbers = // TODO
+        let child_numbers = shared_numbers.clone().deref()[offset*8:(offset+1)*8];// TODO
         joinhandles.push(thread::spawn(move || {
             let mut i = offset;
             let mut sum = 0;
